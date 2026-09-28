@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REBOOT · 2n DAW</title>
+<meta name="description" content="Projecte intermodular REBOOT · Digitalització (M1665) i Sostenibilitat (M1708) · 2n DAW · Curs 2026-2027">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231F8A5B'/%3E%3Cpath d='M9 16a7 7 0 1 1 2.05 4.95' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M7 22l4-1.5L10 16' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#F6F7F4; --surface:#FFFFFF; --surface2:#EEF1EC; --ink:#131B17; --muted:#5B6862; --line:#E1E5DF;
+  --green:#1F8A5B; --green-soft:#E3F3EA; --blue:#4453D6; --blue-soft:#E8EAFB; --amber:#B7791F; --amber-soft:#FBF1DE;
+  --red:#C2412D; --shadow:0 1px 2px rgba(19,27,23,.05),0 8px 24px rgba(19,27,23,.06);
+  --r:16px; --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace; --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1311; --surface:#151C19; --surface2:#1B2420; --ink:#E7EEEA; --muted:#98A7A0; --line:#27322D;
+  --green:#3CC98A; --green-soft:#16372A; --blue:#8D97FF; --blue-soft:#20264A; --amber:#E7B45A; --amber-soft:#3A2E17; --red:#F07A63;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}}
+:root[data-theme="dark"]{
+  --bg:#0E1311; --surface:#151C19; --surface2:#1B2420; --ink:#E7EEEA; --muted:#98A7A0; --line:#27322D;
+  --green:#3CC98A; --green-soft:#16372A; --blue:#8D97FF; --blue-soft:#20264A; --amber:#E7B45A; --amber-soft:#3A2E17; --red:#F07A63;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:inline-flex;gap:8px;align-items:center}
+.eyebrow::before{content:"";width:18px;height:1px;background:currentColor}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em;margin:0}
+h2{font-size:clamp(28px,4vw,40px);font-weight:800;margin:12px 0 10px}
+h3{font-size:18px;font-weight:700}
+p{margin:0 0 12px}
+.lead{font-size:18px;color:var(--muted);max-width:680px}
+section{padding:84px 0;border-top:1px solid var(--line)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.tag{display:inline-flex;align-items:center;gap:6px;font:500 11.5px/1 var(--mono);padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);white-space:nowrap}
+.tag.g{color:var(--green);background:var(--green-soft);border-color:transparent}
+.tag.b{color:var(--blue);background:var(--blue-soft);border-color:transparent}
+.tag.a{color:var(--amber);background:var(--amber-soft);border-color:transparent}
+.grid{display:grid;gap:16px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;z-index:99;background:var(--surface);padding:8px 12px;border-radius:8px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;height:62px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:-.02em}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center}
+.logo small{font:500 11px var(--mono);color:var(--muted);letter-spacing:0}
+nav.menu{margin-left:auto;display:flex;gap:2px}
+nav.menu a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);padding:8px 10px;border-radius:8px}
+nav.menu a:hover,nav.menu a.on{color:var(--ink);background:var(--surface2)}
+.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.burger{display:none}
+@media (max-width:900px){
+  nav.menu{position:fixed;inset:62px 0 auto 0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px 16px;display:none}
+  nav.menu.open{display:flex}
+  nav.menu a{padding:12px}
+  .burger{display:grid;margin-left:auto}
+}
+
+/* hero */
+.hero{padding:64px 0 72px;border-top:0}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(44px,7.5vw,84px);font-weight:800;letter-spacing:-.045em;margin:16px 0 8px}
+.hero h1 span{color:var(--green)}
+.hero .sub{font-size:clamp(18px,2.2vw,22px);font-weight:500;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.btn.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+
+/* passport mock */
+.pass{padding:20px;position:relative;overflow:hidden;max-width:420px;justify-self:center;width:100%}
+.pass::after{content:"";position:absolute;right:-70px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:radial-gradient(var(--green-soft),transparent 70%)}
+.pass-h{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.pass-h b{font:600 13px var(--mono);letter-spacing:.06em}
+.pass-body{display:grid;grid-template-columns:1fr 104px;gap:16px;align-items:start;position:relative;z-index:1}
+.kv{display:grid;gap:9px;font-size:13.5px}
+.kv div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:7px}
+.kv span{color:var(--muted)}
+.kv b{font-weight:600;text-align:right}
+.qr{width:104px;height:104px;padding:7px;background:#fff;border-radius:10px;display:grid;grid-template-columns:repeat(21,1fr);border:1px solid var(--line)}
+.qr i{background:#131B17}.qr i.o{background:transparent}
+.led{display:flex;gap:6px;align-items:center;margin-top:14px;font:500 12px var(--mono);color:var(--muted)}
+.led i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.led i.on{background:var(--amber);box-shadow:0 0 0 0 var(--amber);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--amber) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@media (prefers-reduced-motion:reduce){.led i.on{animation:none}html{scroll-behavior:auto}}
+
+/* project */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.mod{padding:24px}
+.mod .code{font:600 12px var(--mono)}
+.mod.d .code{color:var(--blue)} .mod.s .code{color:var(--green)}
+.mod h3{margin:8px 0 8px;font-size:20px}
+.mod p{color:var(--muted);margin:0}
+.clients{grid-template-columns:repeat(3,1fr);margin-top:16px}
+.client{padding:18px;display:flex;gap:14px;align-items:flex-start}
+.client .ic{flex:none;width:42px;height:42px;border-radius:12px;background:var(--surface2);display:grid;place-items:center;color:var(--green)}
+.client b{display:block;font-size:16px}
+.client span{color:var(--muted);font-size:14px}
+.app{grid-template-columns:repeat(4,1fr);margin-top:16px}
+.space{padding:20px}
+.space .n{font:600 12px var(--mono);color:var(--muted)}
+.space h3{margin:6px 0 4px}
+.space p{font-size:14px;color:var(--muted);margin:0}
+.extra{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.note{padding:20px 22px;display:flex;gap:14px}
+.note .ic{flex:none;color:var(--green)}
+.note p{margin:0;color:var(--muted);font-size:15px}
+.note b{color:var(--ink)}
+.subh{margin:44px 0 4px;font-size:22px;font-weight:700}
+@media (max-width:900px){.two,.extra{grid-template-columns:1fr}.clients{grid-template-columns:1fr 1fr}.app{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.clients,.app{grid-template-columns:1fr}}
+
+/* roadmap */
+.rule{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0 30px}
+.rule>div{padding:16px 18px;display:flex;gap:12px;align-items:center;font-weight:600}
+.rule>div>div span{font:500 12px var(--mono);color:var(--muted);display:block;font-weight:400}
+.rule .dot{width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;font:700 14px var(--mono)}
+.aeas{position:relative;display:grid;gap:12px}
+.aea{display:grid;grid-template-columns:86px 1fr 1fr 1fr;gap:16px;padding:16px 20px;align-items:center}
+.aea .id{display:flex;align-items:center;gap:10px;font:700 14px var(--mono)}
+.aea .id i{width:12px;height:12px;border-radius:4px;flex:none}
+.aea h3{font-size:16px}
+.aea .dates{font:500 12px var(--mono);color:var(--muted);margin-top:3px}
+.aea .f{font-size:14px}
+.aea .f span{display:block;font:500 11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.aea.now{outline:2px solid var(--green);outline-offset:-1px}
+@media (max-width:760px){.rule{grid-template-columns:1fr}.aea{grid-template-columns:1fr;gap:10px}}
+
+/* calendar */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 16px}
+.filters button{font:500 12.5px var(--mono);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.filters button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cal{overflow:hidden}
+.row{display:grid;grid-template-columns:58px 92px 72px 1fr 1fr;gap:14px;padding:13px 18px;border-top:1px solid var(--line);align-items:center;font-size:14.5px}
+.row:first-child{border-top:0}
+.row.hd{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--surface2)}
+.row .s{font:600 13px var(--mono);color:var(--muted)}
+.row .d{font:500 13px var(--mono)}
+.row .ev{color:var(--muted)}
+.row.close{background:color-mix(in srgb,var(--green-soft) 45%,transparent)}
+.row.close .ev{color:var(--ink);font-weight:500}
+.row.today{box-shadow:inset 3px 0 0 var(--green)}
+.row.past{opacity:.55}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--mono)}
+.pill i{width:9px;height:9px;border-radius:3px}
+.nolect{margin-top:14px;font-size:14px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+@media (max-width:760px){
+  .row{grid-template-columns:auto 1fr;gap:4px 12px;padding:14px 16px}
+  .row.hd{display:none}
+  .row .s{grid-row:1}.row .d{grid-row:1}
+  .row .a{grid-column:1/-1}.row .t{grid-column:1/-1;font-weight:600}.row .ev{grid-column:1/-1;font-size:13.5px}
+}
+
+/* today */
+.today-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px}
+.today-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;margin-top:26px;align-items:start}
+.steps{padding:8px 0}
+.step{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:14px 22px;border-top:1px solid var(--line)}
+.step:first-child{border-top:0}
+.step .h{font:600 13px var(--mono);color:var(--green);padding-top:2px}
+.step b{display:block}
+.step p{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+.step.brk{background:var(--surface2)}
+.side{display:grid;gap:16px}
+.box{padding:20px}
+.box h3{font-size:15px;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.box ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.box li{margin:4px 0}
+table.case{width:100%;border-collapse:collapse;font-size:14px}
+table.case th,table.case td{text-align:left;padding:9px 8px;border-top:1px solid var(--line)}
+table.case th{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-top:0}
+table.case td:last-child{text-align:right;font-family:var(--mono);font-weight:600}
+.prompt{position:relative;background:var(--surface2);border-radius:12px;padding:16px 16px 52px;font:13px/1.6 var(--mono);color:var(--ink)}
+.prompt button{position:absolute;right:10px;bottom:10px}
+.small{font-size:13px;color:var(--muted)}
+.qs{display:grid;gap:8px;margin:0;padding:0;list-style:none;counter-reset:q}
+.qs li{counter-increment:q;display:flex;gap:10px;font-weight:500}
+.qs li::before{content:counter(q);font:600 12px var(--mono);width:24px;height:24px;border-radius:7px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;flex:none}
+.soon{padding:28px;margin-top:24px}
+@media (max-width:900px){.today-grid{grid-template-columns:1fr}}
+
+/* evaluation */
+.eval{grid-template-columns:1fr 1fr;margin-top:26px}
+.ra{padding:22px}
+.ra h3{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:14px}
+.ra h3 .code{font:600 12px var(--mono)}
+.ra-row{display:grid;grid-template-columns:44px 1fr 44px;gap:10px;align-items:center;padding:7px 0;font-size:14.5px}
+.ra-row b{font:600 13px var(--mono)}
+.ra-row .w{font:600 13px var(--mono);text-align:right}
+.meter{grid-column:2/3;height:5px;border-radius:5px;background:var(--surface2);overflow:hidden;margin-top:-4px}
+.meter i{display:block;height:100%;border-radius:5px}
+.formula{margin-top:12px;font:12px/1.5 var(--mono);color:var(--muted);background:var(--surface2);padding:10px 12px;border-radius:10px;overflow-wrap:anywhere}
+.how{grid-template-columns:repeat(4,1fr);margin-top:16px}
+.how .card{padding:20px}
+.how .k{font:600 12px var(--mono);color:var(--green)}
+.how h3{margin:8px 0 6px;font-size:16px}
+.how p{font-size:14px;color:var(--muted);margin:0}
+.rules{margin-top:16px;padding:22px 24px}
+.rules ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted)}
+.rules b{color:var(--ink)}
+.levels{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+@media (max-width:900px){.eval{grid-template-columns:1fr}.how{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.how{grid-template-columns:1fr}}
+
+/* tools */
+.tools{grid-template-columns:repeat(4,1fr);margin-top:26px}
+.tool{padding:18px}
+.tool .when{font:500 11.5px var(--mono);color:var(--muted)}
+.tool b{display:block;margin:6px 0 2px}
+.tool p{font-size:14px;color:var(--muted);margin:0}
+.ai-rules{margin-top:16px;padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:18px}
+.ai-rules ol{margin:0;padding-left:20px;display:grid;gap:6px}
+@media (max-width:900px){.tools{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.tools{grid-template-columns:1fr}.ai-rules{grid-template-columns:1fr}}
+
+/* downloads */
+.dls{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));margin-top:26px}
+.dl{padding:20px;display:flex;flex-direction:column;gap:10px}
+.dl .ty{display:flex;gap:6px;flex-wrap:wrap}
+.dl h3{font-size:16px}
+.dl p{font-size:14px;color:var(--muted);margin:0;flex:1}
+.dl .links{display:flex;gap:8px;flex-wrap:wrap}
+.dl .links a{font:600 13px var(--mono);text-decoration:none;padding:9px 12px;border-radius:10px;border:1px solid var(--line);display:inline-flex;gap:6px;align-items:center}
+.dl .links a:hover{border-color:var(--green);color:var(--green)}
+@media (max-width:900px){.dls{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.dls{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:36px 0 48px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;transition:.25s;pointer-events:none;z-index:60}
+.toast.show{opacity:1;transform:translateX(-50%)}
+svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Salta al contingut</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="logo" href="#inici" aria-label="REBOOT, inici">
+      <i><svg class="i" viewBox="0 0 24 24" style="color:#fff;width:18px;height:18px"><path d="M4 12a8 8 0 1 1 2.3 5.6"/><path d="M3 18l3.5-.6L6 14"/></svg></i>
+      <span>REBOOT<br><small>2n DAW · 26/27</small></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Seccions">
+      <a href="#projecte">Projecte</a><a href="#recorregut">Recorregut</a><a href="#calendari">Calendari</a>
+      <a href="#avui">Sessió</a><a href="#avaluacio">Avaluació</a><a href="#eines">Eines</a><a href="#descarregues">Descàrregues</a>
+    </nav>
+    <button class="icon-btn burger" id="burger" aria-label="Obre el menú" aria-expanded="false"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="icon-btn" id="theme" aria-label="Canvia el tema clar o fosc"><svg class="i" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+<!-- HERO -->
+<section class="hero" id="inici">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Projecte intermodular · 2n DAW</span>
+      <h1>RE<span>BOOT</span></h1>
+      <p class="sub">Segona vida, noves oportunitats.</p>
+      <p class="lead">REBOOT dona una segona vida a ordinadors i mòbils. Tu construiràs l’app que en segueix la vida i demostraràs, amb dades, que és útil, segura i sostenible.</p>
+      <div class="chips">
+        <span class="tag b">M1665 · Digitalització</span>
+        <span class="tag g">M1708 · Sostenibilitat</span>
+        <span class="tag">Dilluns 15:00–16:50</span>
+        <span class="tag">27 sessions · 8 AEA</span>
+      </div>
+      <div class="btns">
+        <a class="btn pri" href="#avui"><svg class="i" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span id="heroBtn">Sessió d’avui</span></a>
+        <a class="btn" href="#descarregues"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descàrregues</a>
+      </div>
+    </div>
+    <div class="card pass" aria-label="Exemple de Passaport REBOOT amb dades simulades">
+      <div class="pass-h"><b>PASSAPORT REBOOT</b><span class="tag a">Dades simulades</span></div>
+      <div class="pass-body">
+        <div class="kv">
+          <div><span>ID</span><b class="mono">RB-0001</b></div>
+          <div><span>Equip</span><b>Portàtil A</b></div>
+          <div><span>Intervenció</span><b>SSD + instal·lació</b></div>
+          <div><span>Proves</span><b>2 de 3</b></div>
+          <div><span>Esborrat de dades</span><b>Pendent</b></div>
+          <div><span>Destinació</span><b>—</b></div>
+        </div>
+        <div class="qr" id="qr" role="img" aria-label="Codi QR il·lustratiu"></div>
+      </div>
+      <div class="led"><i></i><i class="on"></i><i></i> Banc de proves: en curs</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTE -->
+<section id="projecte">
+  <div class="wrap">
+    <span class="eyebrow">El projecte</span>
+    <h2>Un projecte, dos mòduls</h2>
+    <p class="lead">REBOOT és una empresa fictícia que recupera dispositius, però els registres que té estan dispersos i la informació, incompleta. Farem una web app per seguir cada equip i justificar què en fem. No reparareu cap ordinador: la vostra feina és desenvolupar, analitzar i decidir.</p>
+    <div class="two">
+      <div class="card mod d"><span class="code">M1665</span><h3>Digitalització aplicada als sectors productius</h3><p>Com transformem un servei amb tecnologia: processos, IoT, IA, dades, núvol i seguretat.</p></div>
+      <div class="card mod s"><span class="code">M1708</span><h3>Sostenibilitat aplicada al sistema productiu</h3><p>Si aquesta transformació és responsable: impacte ambiental i social, circularitat i pla de sostenibilitat.</p></div>
+    </div>
+    <p class="small" style="margin-top:12px">Treballes en un sol projecte, però cada mòdul té els seus resultats d’aprenentatge i la seva nota.</p>
+
+    <h3 class="subh">Sis clients, una base comuna</h3>
+    <p class="lead" style="font-size:16px">En parella (o sol), triareu un client el 5/10. La base de l’app és la mateixa; les decisions, les dades i els indicadors s’adapten al vostre client.</p>
+    <div class="grid clients" id="clients"></div>
+
+    <h3 class="subh">L’app que construirem</h3>
+    <div class="grid app">
+      <div class="card space"><span class="n">01</span><h3>Inventari</h3><p>Registrar i consultar dispositius.</p></div>
+      <div class="card space"><span class="n">02</span><h3>Fitxa de vida</h3><p>Estat, actuacions i destinació de cada equip.</p></div>
+      <div class="card space"><span class="n">03</span><h3>Banc de proves</h3><p>Lectures simulades dels sensors i alertes.</p></div>
+      <div class="card space"><span class="n">04</span><h3>Resultats</h3><p>Indicadors amb dades que podem explicar.</p></div>
+    </div>
+    <div class="extra">
+      <div class="card note"><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg></span><p><b>Passaport REBOOT.</b> Cada dispositiu tindrà un QR que, en escanejar-lo, mostra les proves, les reparacions, l’esborrament de dades, la destinació i l’impacte evitat. És la vostra versió del passaport digital de producte que està introduint la Unió Europea.</p></div>
+      <div class="card note"><span class="ic"><svg class="i" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><p><b>Banc de proves IoT (Wokwi).</b> Un ESP32 simulat amb sensor de temperatura, salut de la bateria, un botó per començar la prova i un LED semàfor. El resultat arriba a la fitxa de vida i d’allà a l’assistent IA, als indicadors i al Passaport QR.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECORREGUT -->
+<section id="recorregut">
+  <div class="wrap">
+    <span class="eyebrow">El recorregut</span>
+    <h2>Vuit AEA, una app que creix</h2>
+    <p class="lead">Una AEA és una activitat d’ensenyament i aprenentatge: cadascuna de les vuit etapes del curs. Totes acaben de la mateixa manera.</p>
+    <div class="rule">
+      <div class="card"><span class="dot" style="background:var(--blue-soft);color:var(--blue)">1</span><div>Una versió de l’app<span>v0 → v1.0</span></div></div>
+      <div class="card"><span class="dot" style="background:var(--green-soft);color:var(--green)">1</span><div>Un capítol del Pla REBOOT 360<span>cara digital + cara sostenible</span></div></div>
+      <div class="card"><span class="dot" style="background:var(--amber-soft);color:var(--amber)">1</span><div>Un checkpoint individual<span>apte / no apte</span></div></div>
+    </div>
+    <div class="aeas" id="aeas"></div>
+  </div>
+</section>
+
+<!-- CALENDARI -->
+<section id="calendari">
+  <div class="wrap">
+    <span class="eyebrow">Calendari</span>
+    <h2>Sessió a sessió</h2>
+    <p class="lead">Tots els dilluns del curs. Les files destacades tanquen una AEA: aquell dia lliures la versió i el capítol, i fas el checkpoint.</p>
+    <div class="filters" id="filters" role="group" aria-label="Filtra per AEA"></div>
+    <div class="card cal" id="cal"></div>
+    <div class="legend"><span><i style="background:color-mix(in srgb,var(--green-soft) 70%,var(--surface))"></i>Tancament d’AEA</span><span><i style="background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--green)"></i>Sessió d’avui o propera</span></div>
+    <p class="nolect" id="nolect"></p>
+  </div>
+</section>
+
+<!-- AVUI -->
+<section id="avui">
+  <div class="wrap">
+    <span class="eyebrow" id="todayEyebrow">Sessió</span>
+    <h2 id="todayTitle">—</h2>
+    <div class="today-head" id="todayTags"></div>
+    <div id="todayBody"></div>
+  </div>
+</section>
+
+<!-- AVALUACIO -->
+<section id="avaluacio">
+  <div class="wrap">
+    <span class="eyebrow">Avaluació</span>
+    <h2>Com t’avaluem</h2>
+    <p class="lead">Cada mòdul té sis resultats d’aprenentatge (RA) i els has d’aprovar tots. Els demostres amb el que lliures a cada AEA i amb el que saps explicar tu.</p>
+    <div class="grid eval" id="eval"></div>
+    <div class="grid how">
+      <div class="card"><span class="k">Cada AEA</span><h3>Versió + capítol</h3><p>Amb una rúbrica que tens abans de començar. Fa la nota de cada RA segons la matriu.</p></div>
+      <div class="card"><span class="k">Cada AEA</span><h3>Checkpoint individual</h3><p>Preguntes curtes sobre la teva feina. És de seguiment: si no ets apte, el repeteixes la sessió següent.</p></div>
+      <div class="card"><span class="k">10/05/2027</span><h3>Prova de validació</h3><p>Individual. Cal treure com a mínim un 5 per superar cada mòdul.</p></div>
+      <div class="card"><span class="k">24/05/2027</span><h3>Demo i defensa</h3><p>Demo en equip i preguntes a cada persona.</p></div>
+    </div>
+    <div class="card rules">
+      <ul>
+        <li><b>Mínim 5 a cada RA</b> i mínim 5 a la prova de validació individual, als dos mòduls.</li>
+        <li>L’autoavaluació i la coavaluació serveixen per millorar; <b>no compten a la nota</b>.</li>
+        <li>Amb <b>més d’un 20% de faltes</b> d’assistència perds l’avaluació contínua.</li>
+        <li>Si no superes algun RA, hi ha una <b>segona convocatòria</b> del 4 al 10 de juny de 2027, independent per a cada RA.</li>
+        <li>Una xifra inventada o un codi que no saps explicar baixen la nota encara que l’app funcioni.</li>
+      </ul>
+      <div class="levels"><span class="tag g">Expert 9–10</span><span class="tag b">Avançat 7–8</span><span class="tag a">Aprenent 5–6</span><span class="tag">Novell &lt; 5</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EINES -->
+<section id="eines">
+  <div class="wrap">
+    <span class="eyebrow">Eines</span>
+    <h2>Cada eina té una funció</h2>
+    <p class="lead">Moltes les farem servir des de les màquines d’IsardVDI. No cal instal·lar res fins que ho indiquem.</p>
+    <div class="grid tools" id="tools"></div>
+    <div class="card ai-rules">
+      <span class="tag g" style="align-self:start">Normes de la IA</span>
+      <ol>
+        <li>La IA et pot proposar codi, textos i idees. El responsable ets tu.</li>
+        <li>Guarda al quadern els prompts importants i què has comprovat de cada resposta.</li>
+        <li>No posis cap dada personal real, ni a la IA ni a l’app.</li>
+        <li>Si no saps explicar una part, no la lliuris.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- DESCARREGUES -->
+<section id="descarregues">
+  <div class="wrap">
+    <span class="eyebrow">Descàrregues</span>
+    <h2>Material de l’alumnat</h2>
+    <p class="lead">Els documents de treball tenen versió .docx perquè hi puguis escriure directament. Els lliuraments es fan sempre a Classroom.</p>
+    <div class="grid dls" id="dls"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>INS Mare de Déu de la Mercè · CFGS Desenvolupament d’Aplicacions Web · Curs 2026–2027</span>
+    <span>REBOOT és un cas fictici. Les dades i els resultats simulats s’identifiquen com a tals.</span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const SESSIONS=[{"n": 1, "d": "2026-09-21", "aea": 0, "t": "Presentació dels mòduls i del projecte REBOOT", "ev": "—", "close": false}, {"n": 2, "d": "2026-09-28", "aea": 0, "t": "Repte 1: tres equips, dues places", "ev": "Fitxa de repte 1 + full REBOOT v0 + tiquet individual (checkpoint 0)", "close": true, "detail": {"mode": "En parella o individual", "goal": "Prendre la primera decisió de REBOOT amb dades (quins dos equips recuperem) i crear el primer inventari, la v0.", "steps": [{"h": "15:00", "t": "Represa i el projecte REBOOT", "p": "Final de la presentació: què és REBOOT, els sis clients, l’app i el recorregut."}, {"h": "15:20", "t": "El cas: tres equips, dues places", "p": "Llegiu el cas. Les dades són les de la fitxa: encara no s’ha comprovat res."}, {"h": "15:25", "t": "Fitxa, apartats 1 a 4", "p": "Prioritzeu i calculeu · tres comprovacions · un benefici i un risc · cinc camps per a l’inventari. Un llegeix i l’altre escriu; canvieu a mitja activitat."}, {"h": "15:50", "t": "Inventari REBOOT v0 (apartat 5)", "p": "Full de càlcul de Google «REBOOT v0 · [noms]» amb els vostres cinc camps i una última columna «Dades simulades (sí/no)». Registreu A, B i C i compartiu l’enllaç a Classroom."}, {"h": "16:00", "t": "Pausa i canvi de rol", "brk": true}, {"h": "16:05", "t": "La IA entra al laboratori (apartat 6)", "p": "Enganxeu el prompt a Gemini o Copilot. Anoteu una cosa que fa bé i una afirmació que no pot demostrar amb les dades. Mantenim la proposta?"}, {"h": "16:25", "t": "Posada en comú", "p": "Dues parelles expliquen la proposta, el cost i una incertesa. La resta hi afegeix una comprovació o un camp."}, {"h": "16:35", "t": "Tiquet de sortida (apartat 7)", "p": "Individual: és el checkpoint 0."}, {"h": "16:45", "t": "Tancament", "p": "El 5/10 triareu client. Avui no hi ha feina per a casa."}], "caseRows": [["A", "Falta emmagatzematge", "SSD i instal·lació", "40 €"], ["B", "Falta carregador", "Carregador nou", "25 €"], ["C", "Pantalla trencada", "Pantalla nova", "100 €"]], "caseNote": "Cal DOS portàtils i hi ha 80 € per a les intervencions. Segons la fitxa, tots tres tenen 8 GB de RAM, Wi-Fi, càmera i teclat. Compatibilitat, funcionament final i esborrament de dades: pendents de comprovar. Dades fictícies.", "prompt": "Analitza aquest cas fictici. Una entitat necessita dos portàtils per a navegador, documents i videotrucades. REBOOT té tres equips i 80 € per a les intervencions. A necessita SSD i instal·lació per 40 €. B necessita carregador per 25 €. C necessita pantalla per 100 €. Tots tres tenen 8 GB de RAM, Wi-Fi, càmera i teclat. Compatibilitat, funcionament i esborrament de dades estan pendents de comprovar. La nostra proposta és [escriviu-la]. Revisa el càlcul, separa fets d’hipòtesis i proposa tres comprovacions. No inventis prestacions ni estalvis ambientals. Respon en menys de 150 paraules.", "questions": ["Això ho sabeu o ho suposeu?", "Com ho comprovaríeu?", "Què hauria de quedar registrat a l’app?"], "deliver": ["La fitxa completada (o una foto llegible)", "L’enllaç al full REBOOT v0", "Activitat diagnòstica: avui no hi ha nota numèrica"], "files": [{"label": "Fitxa PDF", "href": "fitxers/REBOOT_S2_Fitxa_alumnat.pdf"}, {"label": "Fitxa DOCX", "href": "fitxers/REBOOT_S2_Fitxa_alumnat.docx"}]}}, {"n": 3, "d": "2026-10-05", "aea": 1, "t": "Tria de client i procés actual", "ev": "C0 Brief + fitxa de client + mapa del procés actual", "close": false}, {"n": 4, "d": "2026-10-19", "aea": 1, "t": "Grups d’interès, reptes, ASG i ODS", "ev": "Mapa d’actors + reptes del client + graella de materialitat", "close": false}, {"n": 5, "d": "2026-10-26", "aea": 1, "t": "Diagnosi, objectius i primer prototip", "ev": "Capítol C1 + versió v0.1 + checkpoint 1", "close": true}, {"n": 6, "d": "2026-11-02", "aea": 2, "t": "Tecnologies habilitadores i decisió tecnològica", "ev": "Informe de THD + matriu de decisió", "close": false}, {"n": 7, "d": "2026-11-09", "aea": 2, "t": "Primera app: inventari local", "ev": "App (inventari local) + enllaç al repositori", "close": false}, {"n": 8, "d": "2026-11-16", "aea": 2, "t": "IT i OT: el banc de proves IoT", "ev": "Mapa IT/OT + simulació Wokwi + lectures JSON", "close": false}, {"n": 9, "d": "2026-11-23", "aea": 2, "t": "Del banc de proves a l’app: arquitectura", "ev": "Capítol C2 + versió v0.2 + checkpoint 2", "close": true}, {"n": 10, "d": "2026-11-30", "aea": 3, "t": "La IA a REBOOT: cas d’ús", "ev": "Fitxa del cas d’ús + taula de sectors", "close": false}, {"n": 11, "d": "2026-12-14", "aea": 3, "t": "Validació humana i IA responsable", "ev": "Protocol de validació", "close": false}, {"n": 12, "d": "2026-12-21", "aea": 3, "t": "L’assistent IA dins l’app", "ev": "Capítol C3 + versió v0.3 + checkpoint 3", "close": true}, {"n": 13, "d": "2027-01-11", "aea": 4, "t": "Dades: del registre a la informació", "ev": "Diccionari de dades", "close": false}, {"n": 14, "d": "2027-01-18", "aea": 4, "t": "El núvol: on viuen les dades", "ev": "Decisió d’arquitectura cloud", "close": false}, {"n": 15, "d": "2027-01-25", "aea": 4, "t": "Firebase: login i inventari al núvol", "ev": "Increment funcional (login + dades al núvol)", "close": false}, {"n": 16, "d": "2027-02-01", "aea": 4, "t": "Seguretat i privadesa", "ev": "Capítol C4 + versió v0.4 + checkpoint 4", "close": true}, {"n": 17, "d": "2027-02-15", "aea": 5, "t": "Economia circular i cicle de vida", "ev": "Mapa del cicle de vida", "close": false}, {"n": 18, "d": "2027-03-01", "aea": 5, "t": "Reptes: residus electrònics i bretxa digital", "ev": "Fitxa de reptes i accions", "close": false}, {"n": 19, "d": "2027-03-08", "aea": 5, "t": "Indicadors d’impacte i Passaport QR", "ev": "Capítol C5 + versió v0.5 + checkpoint 5", "close": true}, {"n": 20, "d": "2027-03-15", "aea": 6, "t": "Backlog de l’MVP", "ev": "Backlog prioritzat", "close": false}, {"n": 21, "d": "2027-04-05", "aea": 6, "t": "Integració 1: fitxa de vida i banc de proves", "ev": "Increment integrat", "close": false}, {"n": 22, "d": "2027-04-12", "aea": 6, "t": "Integració 2: IA, indicadors i ecodisseny", "ev": "Increment + checklist d’ecodisseny + informes Lighthouse", "close": false}, {"n": 23, "d": "2027-04-19", "aea": 6, "t": "Proves i validació", "ev": "Capítol C6 + versió v1.0 + checkpoint 6", "close": true}, {"n": 24, "d": "2027-04-26", "aea": 7, "t": "Pla de transformació digital", "ev": "Cara digital del capítol C7", "close": false}, {"n": 25, "d": "2027-05-03", "aea": 7, "t": "Informe de sostenibilitat", "ev": "Cara sostenible del capítol C7", "close": false}, {"n": 26, "d": "2027-05-10", "aea": 7, "t": "Versió final i validació individual", "ev": "Versió final + prova de validació individual", "close": false}, {"n": 27, "d": "2027-05-24", "aea": 7, "t": "Demostració i defensa final", "ev": "Pla REBOOT 360 + app final + defensa (checkpoint 7)", "close": true}];
+const AEAS=[{"code": "AEA0", "name": "Descoberta", "app": "v0 · el primer inventari en un full de càlcul", "chapter": "C0 Brief: el repte i la primera decisió", "color": "FFD966"}, {"code": "AEA1", "name": "Diagnosi i primer prototip", "app": "v0.1 · les pantalles de l’app, clicables", "chapter": "C1 Diagnosi: com funciona ara REBOOT i a qui afecta", "color": "C9DAF8"}, {"code": "AEA2", "name": "Tecnologies i IoT", "app": "v0.2 · l’app en local i el banc de proves amb sensors", "chapter": "C2 Tecnologia: què fem servir i quin impacte té", "color": "A2C4C9"}, {"code": "AEA3", "name": "IA supervisada", "app": "v0.3 · l’assistent que suggereix la destinació de cada equip", "chapter": "C3 IA: què fa, com la validem, quan no cal", "color": "FFF2CC"}, {"code": "AEA4", "name": "Dades, núvol i seguretat", "app": "v0.4 · login, dades al núvol i regles d’accés", "chapter": "C4 Dades: on són les dades i qui les pot veure", "color": "EAD1DC"}, {"code": "AEA5", "name": "Circularitat i impacte", "app": "v0.5 · pantalla de resultats i Passaport QR", "chapter": "C5 Circularitat: cicle de vida, normativa i indicadors", "color": "D9EAD3"}, {"code": "AEA6", "name": "Integració i validació", "app": "v1.0 · tot junt, provat, lleuger i accessible", "chapter": "C6 Validació: proves i resultats", "color": "D9D2E9"}, {"code": "AEA7", "name": "Demostració i defensa", "app": "Versió final amb el QR imprès", "chapter": "C7 Full de ruta: el pla complet", "color": "E6B8AF"}];
+const CLIENTS=[{"name": "Study", "desc": "Equips per estudiar", "icon": "book"}, {"name": "Play", "desc": "Espai juvenil de videojocs", "icon": "play"}, {"name": "Creator", "desc": "Creació audiovisual", "icon": "cam"}, {"name": "Share", "desc": "Préstec comunitari", "icon": "share"}, {"name": "Office", "desc": "Equips d’una cooperativa", "icon": "office"}, {"name": "Access", "desc": "Necessitats d’accessibilitat", "icon": "access"}];
+const MODS=[{"code": "M1665", "name": "Digitalització", "w": [10, 10, 30, 10, 10, 30], "ra": ["Processos digitals i entorns IT/OT", "Tecnologies habilitadores digitals", "Sistemes al núvol (cloud, edge, fog, mist)", "Aplicacions de la IA", "Dades i la seva protecció", "Projecte de transformació digital"]}, {"code": "M1708", "name": "Sostenibilitat", "w": [10, 10, 10, 20, 30, 20], "ra": ["Aspectes ambientals, socials i de governança", "Reptes ambientals i socials", "Criteris en la vida professional i personal", "Productes i serveis circulars", "Activitats amb menys impacte", "Pla de sostenibilitat"]}];
+const TOOLS=[{"when": "Tot el curs", "name": "IsardVDI", "what": "Màquines virtuals amb les eines preparades."}, {"when": "Tot el curs", "name": "Classroom", "what": "Enunciats, rúbriques i lliuraments."}, {"when": "Tot el curs", "name": "Quadern de projecte", "what": "Què heu fet, captures, prompts i què heu comprovat."}, {"when": "Des d’avui", "name": "Gemini o Copilot", "what": "IA generativa per contrastar, sempre supervisada."}, {"when": "AEA0", "name": "Google Sheets", "what": "Inventari v0: la línia base del projecte."}, {"when": "AEA1", "name": "Google Stitch", "what": "Pantalles i prototip clicable (v0.1)."}, {"when": "AEA2", "name": "Antigravity · React + Vite", "what": "Programar la primera app amb IA."}, {"when": "AEA2 · AEA6", "name": "Wokwi (ESP32)", "what": "Banc de proves IoT simulat."}, {"when": "Des de novembre", "name": "Repositori de codi", "what": "Codi i historial de versions de l’app."}, {"when": "AEA4", "name": "Firebase", "what": "Login, dades al núvol i regles d’accés."}, {"when": "AEA5", "name": "Generador de QR", "what": "El Passaport REBOOT de cada dispositiu."}, {"when": "AEA6", "name": "Lighthouse", "what": "Rendiment, accessibilitat i ecodisseny de l’app."}];
+const FILES=[{"title": "Guia de l’alumnat", "desc": "Què farem, com treballarem i com t’avaluarem aquest curs.", "tags": [["Guia", "g"], ["Consulta", ""]], "links": [{"label": "PDF", "href": "fitxers/REBOOT_Guia_alumnat.pdf"}]}, {"title": "Fitxa de repte 1 · Primera decisió", "desc": "Sessió 2 (28/09). Tres equips, dues places i l’inventari v0.", "tags": [["S2 · 28/09", "b"], ["Document de treball", "a"]], "links": [{"label": "PDF", "href": "fitxers/REBOOT_S2_Fitxa_alumnat.pdf"}, {"label": "DOCX", "href": "fitxers/REBOOT_S2_Fitxa_alumnat.docx"}]}];
+const NOLECT=[{"d": "2026-10-12", "why": "Festiu estatal"}, {"d": "2026-12-07", "why": "Dia de lliure disposició"}, {"d": "2026-12-28", "why": "Vacances de Nadal"}, {"d": "2027-01-04", "why": "Vacances de Nadal"}, {"d": "2027-02-08", "why": "Dia de lliure disposició"}, {"d": "2027-02-22", "why": "Jornades tècniques"}, {"d": "2027-03-22", "why": "Vacances de Setmana Santa"}, {"d": "2027-03-29", "why": "Vacances de Setmana Santa"}, {"d": "2027-05-17", "why": "Festiu local"}];
+</script>
+<script>
+(function(){
+const $=s=>document.querySelector(s), el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const fd=s=>{const d=pd(s);return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')};
+const fdy=s=>fd(s)+'/'+pd(s).getFullYear();
+const ICON={
+ book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+ play:'<rect x="3" y="7" width="18" height="11" rx="4"/><path d="M8 11v3M6.5 12.5h3M15 12h.01M17.5 13.5h.01"/>',
+ cam:'<rect x="3" y="7" width="13" height="11" rx="2"/><path d="M16 11l5-3v9l-5-3"/>',
+ share:'<circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M9.2 10.8l5.6-3.3M9.2 13.2l5.6 3.3"/>',
+ office:'<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2"/>',
+ access:'<circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4l-3 6M12 14l3 6"/>',
+ dl:'<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+ copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ bulb:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+ table:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/>',
+ ai:'<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>'
+};
+const ic=(n,s)=>`<svg class="i" viewBox="0 0 24 24"${s?` style="${s}"`:''}>${ICON[n]}</svg>`;
+
+/* theme + menu */
+const root=document.documentElement;
+try{const t=localStorage.getItem('reboot-theme');if(t)root.dataset.theme=t}catch(e){}
+$('#theme').onclick=()=>{const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;root.dataset.theme=dark?'light':'dark';try{localStorage.setItem('reboot-theme',root.dataset.theme)}catch(e){}};
+const menu=$('#menu'),bg=$('#burger');
+bg.onclick=()=>{const o=menu.classList.toggle('open');bg.setAttribute('aria-expanded',o)};
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>{menu.classList.remove('open');bg.setAttribute('aria-expanded',false)});
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)};
+
+/* QR decorative */
+(function(){const q=$('#qr');let s=7;const r=()=>(s=(s*9301+49297)%233280)/233280;
+ const finder=(x,y)=>{for(const[fx,fy]of[[0,0],[14,0],[0,14]]){const dx=x-fx,dy=y-fy;if(dx>=0&&dx<7&&dy>=0&&dy<7){return(dx===0||dx===6||dy===0||dy===6||(dx>=2&&dx<=4&&dy>=2&&dy<=4))?1:0}}return -1};
+ for(let y=0;y<21;y++)for(let x=0;x<21;x++){const f=finder(x,y);const on=f===-1?(r()>.5):f===1;q.appendChild(el('i',on?'':'o'))}})();
+
+/* today / next session */
+const today=new Date();today.setHours(0,0,0,0);
+const OVR=new URLSearchParams(location.search).get('s');
+let cur=OVR?SESSIONS.find(s=>s.n==+OVR):SESSIONS.find(s=>pd(s.d)>=today);
+const isToday=cur&&+pd(cur.d)===+today;
+const finished=!cur;
+
+/* clients */
+$('#clients').append(...CLIENTS.map(c=>{const d=el('div','card client');d.innerHTML=`<span class="ic">${ic(c.icon)}</span><div><b>REBOOT ${esc(c.name)}</b><span>${esc(c.desc)}</span></div>`;return d}));
+
+/* AEAs */
+$('#aeas').append(...AEAS.map((a,i)=>{const ss=SESSIONS.filter(s=>s.aea===i);const d=el('div','card aea'+(cur&&cur.aea===i?' now':''));
+ d.innerHTML=`<div class="id"><i style="background:#${a.color}"></i>${a.code}</div>
+ <div><h3>${esc(a.name)}</h3><div class="dates">${fd(ss[0].d)} – ${fd(ss[ss.length-1].d)} · ${ss.length} ${ss.length>1?'sessions':'sessió'}</div></div>
+ <div class="f"><span>App</span>${esc(a.app)}</div><div class="f"><span>Pla REBOOT 360</span>${esc(a.chapter)}</div>`;return d}));
+
+/* calendar */
+const cal=$('#cal');let filt=-1;
+function drawCal(){cal.innerHTML='';cal.append(el('div','row hd','<span>Sessió</span><span>Dia</span><span>AEA</span><span>Què farem</span><span>Què lliurarem</span>'));
+ SESSIONS.filter(s=>filt<0||s.aea===filt).forEach(s=>{const a=AEAS[s.aea];const cls=['row'];if(s.close)cls.push('close');if(cur&&s.n===cur.n)cls.push('today');else if(pd(s.d)<today)cls.push('past');
+  const r=el('div',cls.join(' '));r.innerHTML=`<span class="s">S${s.n}</span><span class="d">${fdy(s.d)}</span><span class="a"><span class="pill"><i style="background:#${a.color}"></i>${a.code}</span></span><span class="t">${esc(s.t)}${s.detail?` · <a href="#avui" onclick="window.__show(${s.n})">material</a>`:''}</span><span class="ev">${esc(s.ev)}</span>`;cal.append(r)})}
+const f=$('#filters');[-1,...AEAS.map((_,i)=>i)].forEach(i=>{const b=el('button',i<0?'on':'',i<0?'Totes':AEAS[i].code);b.onclick=()=>{filt=i;f.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');drawCal()};f.append(b)});
+drawCal();
+$('#nolect').textContent='No hi ha classe: '+NOLECT.map(x=>fd(x.d)+' ('+x.why.charAt(0).toLowerCase()+x.why.slice(1)+')').join(' · ')+'.';
+
+/* session section */
+function showSession(s,label){
+ const a=AEAS[s.aea];
+ $('#todayEyebrow').textContent=label;
+ $('#todayTitle').textContent=s.t;
+ $('#todayTags').innerHTML=`<span class="tag">S${s.n} · ${fdy(s.d)}</span><span class="tag"><span class="pill"><i style="background:#${a.color}"></i>${a.code} ${esc(a.name)}</span></span>`+(s.detail?`<span class="tag g">${esc(s.detail.mode)}</span>`:'');
+ const B=$('#todayBody');B.innerHTML='';
+ if(!s.detail){B.append(el('div','card soon',`<h3 style="margin-bottom:6px">Material en preparació</h3><p class="small" style="margin:0">El guió i les fitxes d’aquesta sessió es publicaran aquí. Què lliurarem: <b style="color:var(--ink)">${esc(s.ev)}</b>.</p>`));return}
+ const D=s.detail;const g=el('div','today-grid');
+ const st=el('div','card steps');st.innerHTML=`<div class="step" style="border-top:0"><span class="h">${ic('flag','color:var(--green)')}</span><div><b>Objectiu</b><p>${esc(D.goal)}</p></div></div>`+D.steps.map(x=>`<div class="step${x.brk?' brk':''}"><span class="h">${x.h}</span><div><b>${esc(x.t)}</b>${x.p?`<p>${x.p}</p>`:''}</div></div>`).join('');
+ const side=el('div','side');
+ side.append(el('div','card box',`<h3>${ic('table','color:var(--green)')}El cas</h3><table class="case"><thead><tr><th>Equip</th><th>Què li passa</th><th>Cost</th></tr></thead><tbody>${D.caseRows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${esc(r[1])}<br><span class="small">${esc(r[2])}</span></td><td>${r[3]}</td></tr>`).join('')}</tbody></table><p class="small" style="margin:10px 0 0">${esc(D.caseNote)}</p>`));
+ const pr=el('div','card box',`<h3>${ic('ai','color:var(--green)')}Prompt per a la IA</h3><div class="prompt" id="prompt">${esc(D.prompt)}<button class="btn" id="copyP" style="padding:8px 12px;font-size:13px">${ic('copy','width:16px;height:16px')}Copia</button></div><p class="small" style="margin:10px 0 0">Substitueix <span class="mono">[escriviu-la]</span> per la vostra proposta. Sense accés a la IA, feu servir la resposta simulada de la fitxa.</p>`);
+ side.append(pr);
+ side.append(el('div','card box',`<h3>${ic('bulb','color:var(--green)')}Tres preguntes</h3><ol class="qs">${D.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>`));
+ side.append(el('div','card box',`<h3>${ic('dl','color:var(--green)')}Lliurament a Classroom</h3><ul>${D.deliver.map(x=>`<li>${x}</li>`).join('')}</ul><div class="links" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${D.files.map(fl=>`<a class="btn" style="padding:9px 12px;font-size:13px" href="${fl.href}" download>${ic('dl','width:16px;height:16px')}${esc(fl.label)}</a>`).join('')}</div>`));
+ g.append(st,side);B.append(g);
+ $('#copyP').onclick=()=>{navigator.clipboard?navigator.clipboard.writeText(D.prompt).then(()=>toast('Prompt copiat'),()=>toast('No s’ha pogut copiar')):toast('Selecciona i copia el text')};
+}
+window.__show=n=>{const s=SESSIONS.find(x=>x.n===n);showSession(s,s===cur?(isToday?'Avui':'Propera sessió'):'Sessió '+s.n)};
+if(finished){$('#todayEyebrow').textContent='Curs acabat';$('#todayTitle').textContent='Heu completat REBOOT';$('#heroBtn').textContent='Calendari';}
+else{showSession(cur,isToday?'Avui':'Propera sessió');$('#heroBtn').textContent=isToday?'Sessió d’avui':'Propera sessió · '+fd(cur.d)}
+
+/* evaluation */
+$('#eval').append(...MODS.map(m=>{const d=el('div','card ra');const col=m.code==='M1665'?'var(--blue)':'var(--green)';
+ d.innerHTML=`<h3><span>${esc(m.name)}</span><span class="code" style="color:${col}">${m.code}</span></h3>`+m.ra.map((r,i)=>`<div class="ra-row"><b style="color:${col}">RA${i+1}</b><span>${esc(r)}</span><span class="w">${m.w[i]}%</span><span class="meter"><i style="width:${m.w[i]/30*100}%;background:${col}"></i></span></div>`).join('')+`<div class="formula">Nota ${m.code} = ${m.w.map((w,i)=>w+'%·RA'+(i+1)).join(' + ')}</div>`;return d}));
+
+/* tools */
+$('#tools').append(...TOOLS.map(t=>el('div','card tool',`<span class="when">${esc(t.when)}</span><b>${esc(t.name)}</b><p>${esc(t.what)}</p>`)));
+
+/* downloads */
+$('#dls').append(...FILES.map(fl=>{const d=el('div','card dl');d.innerHTML=`<div class="ty">${fl.tags.map(t=>`<span class="tag ${t[1]}">${esc(t[0])}</span>`).join('')}</div><h3>${esc(fl.title)}</h3><p>${esc(fl.desc)}</p><div class="links">${fl.links.map(l=>`<a href="${l.href}" download>${ic('dl','width:16px;height:16px')}${esc(l.label)}</a>`).join('')}</div>`;return d}));
+
+/* active nav */
+const links=[...menu.querySelectorAll('a')];const secs=links.map(a=>$(a.getAttribute('href')));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>s&&io.observe(s));
+})();
+</script>
+</body>
+</html>
