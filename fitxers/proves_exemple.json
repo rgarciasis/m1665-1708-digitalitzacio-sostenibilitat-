@@ -1,0 +1,137 @@
+[
+  {
+    "bench": "REBOOT-BP1",
+    "test": 1,
+    "deviceId": "T-01",
+    "tempC": [
+      38.2,
+      40.5,
+      42.1,
+      43.0,
+      43.4
+    ],
+    "maxTempC": 43.4,
+    "batteryPct": 91,
+    "result": "Apte",
+    "reasons": []
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 2,
+    "deviceId": "T-02",
+    "tempC": [
+      36.9,
+      39.8,
+      43.7,
+      47.2,
+      49.5
+    ],
+    "maxTempC": 49.5,
+    "batteryPct": 84,
+    "result": "Apte",
+    "reasons": []
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 3,
+    "deviceId": "T-03",
+    "tempC": [
+      41.0,
+      48.6,
+      55.3,
+      61.8,
+      66.2
+    ],
+    "maxTempC": 66.2,
+    "batteryPct": 88,
+    "result": "Diagnosi",
+    "reasons": [
+      "Temperatura alta"
+    ]
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 4,
+    "deviceId": "T-04",
+    "tempC": [
+      33.5,
+      35.1,
+      36.4,
+      37.0,
+      37.2
+    ],
+    "maxTempC": 37.2,
+    "batteryPct": 62,
+    "result": "Diagnosi",
+    "reasons": [
+      "Bateria baixa"
+    ]
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 5,
+    "deviceId": "T-05",
+    "tempC": [
+      39.4,
+      44.0,
+      48.9,
+      52.6,
+      55.1
+    ],
+    "maxTempC": 55.1,
+    "batteryPct": 95,
+    "result": "Apte",
+    "reasons": []
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 6,
+    "deviceId": "T-06",
+    "tempC": [
+      45.2,
+      53.9,
+      60.4,
+      67.5,
+      71.3
+    ],
+    "maxTempC": 71.3,
+    "batteryPct": 57,
+    "result": "Diagnosi",
+    "reasons": [
+      "Temperatura alta",
+      "Bateria baixa"
+    ]
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 7,
+    "deviceId": "T-07",
+    "tempC": [
+      35.8,
+      37.9,
+      39.6,
+      40.8,
+      41.5
+    ],
+    "maxTempC": 41.5,
+    "batteryPct": 80,
+    "result": "Apte",
+    "reasons": []
+  },
+  {
+    "bench": "REBOOT-BP1",
+    "test": 8,
+    "deviceId": "T-03",
+    "tempC": [
+      37.6,
+      41.2,
+      44.8,
+      47.9,
+      50.3
+    ],
+    "maxTempC": 50.3,
+    "batteryPct": 88,
+    "result": "Apte",
+    "reasons": []
+  }
+]
